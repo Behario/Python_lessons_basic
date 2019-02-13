@@ -51,6 +51,16 @@ for i in a:
 # Не нужно решать задачу так:
 # print("a = ", b, "b = ", a) - это неправильное решение!
 
+# Решение с помощью доп переменной
+
+variableA = input('Решение через доп. переменную. Введите значение первой переменной. Желательно текст ')
+print("Значение переменной variableA =",variableA)
+variableB = input('Введите значение второй переменной. Желательно текст ')
+print("Значение переменной variableB =",variableB)
+variableC = variableA
+variableA = variableB
+variableB = variableC
+print("Перетусовали. Теперь variableA =",variableA,"А variableB =",variableB)
 
 # Задача-3: Запросите у пользователя его возраст.
 # Если ему есть 18 лет, выведите: "Доступ разрешен",
