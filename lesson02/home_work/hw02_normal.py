@@ -27,7 +27,7 @@ print(f"Список б имеет вид {b}")
 date_num = "12.05.2018"
 print(f"Наша дата имеет вид {date_num}")
 date_num = date_num.split(".")
-date_day = {"12":"Двенадцатое"}
+date_day = {"12":"двенадцатое"}
 date_month = {"05":"мая"}
 
 for key1 in date_day:
