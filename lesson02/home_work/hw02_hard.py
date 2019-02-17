@@ -7,24 +7,13 @@ k_pos = equation.find("=")+2
 
 if equation[k_pos] == "-":
     k_koef = -1
-elif equation[k_pos] == "+":
-    k_koef = 1
-    
-pos_symbol = equation.find("x") + 2
-
-if equation[pos_symbol] == "+":
-    b_koef = 1
-if equation[pos_symbol] == "-":
-    b_koef = -1
+else:
+    k_koef = 1    
 
 kx = float(equation[k_pos+1 : k_pos+3]) * x * k_koef
-b = float(equation[pos_symbol+2 :]) * b_koef
+b = float(equation[k_pos+7 :]) 
 y = kx + b
-print(f"Значение y - {y:.4f}")
-
-
-
-
+print(f"Значение y: {y:.4f}")
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy'.
 # Проверить, корректно ли введена дата.
@@ -37,12 +26,12 @@ print(f"Значение y - {y:.4f}")
 #  (т.е. 2 символа для дня, 2 - для месяца, 4 - для года)
 
 # Пример корректной даты
-date = '01.11.1985'
+# date = '01.11.1985'
 
 # Примеры некорректных дат
-date = '01.22.1001'
-date = '1.12.1001'
-date = '-2.10.3001'
+# date = '01.22.1001'
+# date = '1.12.1001'
+# date = '-2.10.3001'
 
 
 # Задание-3: "Перевёрнутая башня" (Задача олимпиадного уровня)
