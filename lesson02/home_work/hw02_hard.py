@@ -32,6 +32,44 @@ print(f"Значение y: {y:.4f}")
 # date = '01.22.1001'
 # date = '1.12.1001'
 # date = '-2.10.3001'
+#Решение
+
+date = input("Введите дату в формате dd.mm.yyyy ")
+
+date_day = date[0:2]
+date_sep_1 = date[2]
+date_month = date[3:5]
+date_sep_2 = date[5]
+date_year = date[6:]
+
+day_range_1 = ["01","02","03","04","05","06","07","08","09","10",
+               "11","12","13","14","15","16","17","18","19","20",
+               "21","22","23","24","25","26","27","28","29","30","31"]
+
+day_range_2 = ["01","02","03","04","05","06","07","08","09","10",
+               "11","12","13","14","15","16","17","18","19","20",
+               "21","22","23","24","25","26","27","28","29","30",]
+
+year_range = list(range(1,100))
+
+month = {"01":day_range_1,"02":day_range_2,"03":day_range_1,"04":day_range_2,
+         "05":day_range_1,"06":day_range_2,"07":day_range_1,"08":day_range_2,
+         "09":day_range_1,"10":day_range_2, "11":day_range_1,"12":day_range_2}
+
+if date_month not in month.keys():
+    print("Номер месяца введен некорректно")
+    
+if date_month in month.keys() and date_day not in month[date_month]:
+    print("Номер дня введен некорректно")
+   
+if len(date_year) != 4 or date_year[0] == "0" or int(date_year[2:-1]) not in year_range:
+    print("Номер года введен некорректно")
+
+if date_sep_1 != "." or date_sep_2 != ".":
+    print("Разделители введены некорректно")
+    
+if date_month in month.keys() and date_day in month[date_month] and len(date_year) == 4 and date_year[0] != "0" and int(date_year[2:-1]) in year_range and date_sep_1 == "." and date_sep_2 == ".":
+    print(f"Все введено корректно! Дата {date}")
 
 
 # Задание-3: "Перевёрнутая башня" (Задача олимпиадного уровня)
