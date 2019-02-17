@@ -1,27 +1,29 @@
 # Задание-1: уравнение прямой вида y = kx + b задано в виде строки.
 # Определить координату y точки с заданной координатой x.
 #Решение
-eq = 'y = -12x + 11111140.2121' ## Сделал немного иначе - пользователь будет сам вводить числа
-eq = 'y = -12x + b'
-print(f"решаем уравнение вида - {eq}")
-x = float(input("Введите значение коэффициента x "))
-b = float(input("Введите значение числа b "))
-eq = eq.split(" ")
-n = 0
-while n != len(eq):
-    if eq[n] == "y":
-        eq.remove(eq[n])
-    if eq[n] == "=":
-        eq.remove(eq[n])
-    if eq[n] == "-":
-        eq.remove(eq[n])
-    if eq[n] == "+":
-        eq.remove(eq[n])
-    n = n+1
-eq_values = [-12*x, b]
-eq_dict = dict(zip(eq, eq_values))
-y = eq_dict["-12x"] + eq_dict["b"]
-print(f"Ваш ответ {y:.2f}")
+equation = 'y = -12x + 11111140.2121' 
+x = 2.5
+k_pos = equation.find("=")+2
+
+if equation[k_pos] == "-":
+    k_koef = -1
+elif equation[k_pos] == "+":
+    k_koef = 1
+    
+pos_symbol = equation.find("x") + 2
+
+if equation[pos_symbol] == "+":
+    b_koef = 1
+if equation[pos_symbol] == "-":
+    b_koef = -1
+
+kx = float(equation[k_pos+1 : k_pos+3]) * x * k_koef
+b = float(equation[pos_symbol+2 :]) * b_koef
+y = kx + b
+print(f"Значение y - {y:.4f}")
+
+
+
 
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy'.
