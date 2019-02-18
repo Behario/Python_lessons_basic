@@ -3,16 +3,15 @@
 #Решение
 equation = 'y = -12x + 11111140.2121' 
 x = 2.5
-k_pos = equation.find("=")+2
+x_pos = equation.find("x")
+k_pos = equation.find("=")+2  
+b_pos = equation.find("x") + 4
 
-if equation[k_pos] == "-":
-    k_koef = -1
-else:
-    k_koef = 1    
+kx = float(equation[k_pos:x_pos]) * x 
+b = float(equation[b_pos:])
 
-kx = float(equation[k_pos+1 : k_pos+3]) * x * k_koef
-b = float(equation[k_pos+7 :]) 
 y = kx + b
+
 print(f"Значение y: {y:.4f}")
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy'.
