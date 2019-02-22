@@ -9,6 +9,71 @@
 # Ввод: -2/3 - -2
 # Вывод: 1 1/3
 
+def fraction_numerator(element): ##Парсим дроби, n может принимать только значения 0 или 2
+    fract_num = str(element)
+    if fract_num.find("/") != -1:
+        numerator = int(fract_num[0:fract_num.find("/")])
+        return numerator
+    elif fract_num.find("/") == -1:
+        numerator = int(fract_num)
+        return numerator
+
+
+def fraction_denominator(element):
+    fract_den = str(element)
+    if fract_den.find("/") != -1: ##Возвращаем только если находим знак дроби, так как целое возвращает первая функция
+        denominator = int(fract_den[fract_den.find("/")+1:])
+        return denominator
+    else:
+        return 1
+
+def action_fract(num1, num2, den1, den2, sign):
+    if sign == "+":
+        den_whole = den1 * den2
+        num_whole = num1*den2 + num2*den1
+        modulo = abs(num_whole) % den_whole
+        if num_whole < 0:
+            whole = abs(num_whole) // den_whole * -1
+        else:
+            whole = abs(num_whole) // den_whole
+        if whole == 0:
+            return f"{modulo}/{den_whole}"
+        elif modulo == 0:
+            return f"{whole}"
+        else:
+            return f"{whole} {modulo}/{den_whole}"
+    if sign == "-":
+        den_whole = den1 * den2
+        num_whole = num1*den2 - num2*den1
+        modulo = abs(num_whole) % den_whole
+        if num_whole < 0:
+            whole = abs(num_whole) // den_whole * -1
+        else:
+            whole = abs(num_whole) // den_whole
+        if whole == 0:
+            return f"{modulo}/{den_whole}"
+        elif modulo == 0:
+            return f"{whole}"
+        else:
+            return f"{whole} {modulo}/{den_whole}"
+
+
+print("Программа чувствительна к пробелам, между числами, операторами вычисления обязательно должны быть пробелы")
+parser = input("Введите выражение с простыми дробями для вычисления, формата 5/6 + 4/7: ")
+parser = parser.split(" ")
+
+num_1 = fraction_numerator(parser[0]) ##Числитель дроби 1
+num_2 = fraction_numerator(parser[2]) ##Числитель дроби 2
+
+sign = parser[1]
+
+den_1 = fraction_denominator(parser[0]) ##Знаменатель дроби 1
+den_2 = fraction_denominator(parser[2]) ##Знаменатель дроби 2
+
+print(action_fract(num_1, num_2, den_1, den_2, sign))
+
+
+
 
 # Задание-2:
 # Дана ведомость расчета заработной платы (файл "data/workers").
