@@ -33,16 +33,16 @@ def split_func(string):
         if i == i.upper(): #Проверяем элемент i
             str1 = string.split(i) #Объявляем новый лист, построенный на основании строки
             str2.append(str1[0]) #Добавляем первый элемент листа к нашему листу на return
-            string = string[string.find(i)+1:] #Преобразовываем строку: удаляем подстроку, которая вошла в str2 и эдемент i
+            string = string[string.find(i)+1:] #Преобразовываем строку: удаляем подстроку, которая вошла в str2 и элемент i
             for j in str2: #Делаем проверку, чтобы в str 2 не попали пустые строки
                 if j == "":
                     str2.remove(j)
-    if string[-1] == string[-1].lower():
-        str2.append(string[-1])
+            if string == string.lower(): #Данная реализация имеет недостаток: она не проверяет последний элемент в переменной str1. Поэтому делаем финальную проверку: берем и напрямую смотрим, а осталось ли в обрезанной string что то, что было бы нам полезно.
+                str2.append(string)
     return str2
 
 
-b = split_func(line)
+b = split_func(line[:])
 print(b)
 
 # Задание-2:
