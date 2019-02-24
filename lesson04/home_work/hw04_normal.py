@@ -27,6 +27,24 @@ print(lower_line)
 #Решение без re
 
 
+def split_func(string):
+    str2 = [] #Объявляю лист
+    for i in string:
+        if i == i.upper(): #Проверяем элемент i
+            str1 = string.split(i) #Объявляем новый лист, построенный на основании строки
+            str2.append(str1[0]) #Добавляем первый элемент листа к нашему листу на return
+            string = string[string.find(i)+1:] #Преобразовываем строку: удаляем подстроку, которая вошла в str2 и эдемент i
+            for j in str2: #Делаем проверку, чтобы в str 2 не попали пустые строки
+                if j == "":
+                    str2.remove(j)
+    if string[-1] == string[-1].lower():
+        str2.append(string[-1])
+    return str2
+
+
+b = split_func(line)
+print(b)
+
 # Задание-2:
 # Вывести символы в верхнем регистре, слева от которых находятся
 # два символа в нижнем регистре, а справа - два символа в верхнем регистре.
