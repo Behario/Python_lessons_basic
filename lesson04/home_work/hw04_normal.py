@@ -106,6 +106,8 @@ def open_file(question):
         print("Файл был перезаписан")
     elif "N".lower() == question:
         print("Файл не был перезаписан")
+    else:
+        print("Я не знаю, что вы ввели")
 
 
 ask = input("Хотите выполнить перезапись файла? Y/да : N/нет ")
