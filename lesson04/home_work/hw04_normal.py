@@ -72,6 +72,21 @@ line_2 = 'mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysm'\
 up_line = re.findall(r"[a-z]{2}([A-Z]+)[A-Z]{2}", line_2)
 print(up_line)
 
+#Решение без re
+result_list = []
+for ind, el in enumerate(line_2):
+    if el.isupper() and line_2[ind - 1].islower() and line_2[ind - 2].islower():
+        i = ind
+        s = ''
+        while line_2[i].isupper():
+            s += line_2[i]
+            if i + 1 <= len(line_2) - 1:
+                i += 1
+            else:
+                break
+        if len(s[:-2]) > 0:
+            result_list.append(s[:-2])
+print(result_list)
 
 # Задание-3:
 # Напишите скрипт, заполняющий указанный файл (самостоятельно задайте имя файла)
@@ -79,3 +94,17 @@ print(up_line)
 # 2500-значное произвольное число.
 # Найдите и выведите самую длинную последовательность одинаковых цифр
 # в вышезаполненном файле.
+
+def open_file(question):
+    num = [random.randint(0, 100) for i in range(2500)]
+    num_str = str(num)
+    if "Y".lower() == question:
+        my_file = open('d.txt', 'w+', encoding='utf-8')
+        my_file.write(num_str)
+        my_file.close()
+        print("Файл был перезаписан")
+    elif "N".lower() == question:
+        print("Файл не был перезаписан")
+
+
+ask = input("Хотите выполнить перезапись файла? Y/да : N/нет ")
