@@ -6,6 +6,7 @@ import sys
 # из которой запущен данный скрипт.
 # И второй скрипт, удаляющий эти папки.
 
+
 def create_dir():
     i = 1
     while i < 10:
@@ -23,7 +24,7 @@ def create_dir():
 def delete_dir():
     i = 1
     while i < 10:
-        path_main = os.getcwd()  # Определяем текущую директорию и применяем ее для создания новой папки:
+        path_main = os.getcwd()  # Определяем текущую директорию и применяем ее для удаления ранее созданных папок:
         path = f"{path_main}/dir_{i}"
         try:
             os.rmdir(path)
@@ -35,6 +36,7 @@ def delete_dir():
 
 # Задача-2:
 # Напишите скрипт, отображающий папки текущей директории.
+
 
 def show_dir():
     path = os.getcwd()
@@ -49,5 +51,47 @@ def copy():
     name_destination = file_name.split("/")
     name_destination = name_destination[-1]
     shutil.copyfile(file_name, f"{name_destination}.copy")
+
+# ---------------------------------------------------------------------------------- #
+# Скрипты для задания Normal
+
+
+def show_f():  # Показывает содержимое главного каталога (только папки)
+    path = os.getcwd()
+    return [d for d in os.listdir(path) if os.path.isdir(d)]
+
+
+def show_d(req_dir):  # Показать содержимое папки, когда мы находимся в главном каталоге
+    return os.listdir(req_dir)
+
+
+def show_dc():  # Показывает содержимое из текущей папки
+    path = os.getcwd()
+    return os.listdir(path)
+
+
+def move(req_dir):  # Перейти в новую папку
+    os.chdir(req_dir)
+    return os.getcwd()
+
+
+def delete(req_dir):  # Удалить папку
+    path = f"{req_dir}"
+    try:
+        os.rmdir(path)
+    except OSError:
+        print(f"Удалить папку {path} не удалось")
+    else:
+        print("Удаление прошло успешно")
+
+
+def create(req_dir):  # Создать папку
+    path = f"{req_dir}"
+    try:
+        os.mkdir(path)
+    except OSError:
+        print(f"Создание папки {path} не удалось")
+    else:
+        print("Папка была успешно создана")
 
 
