@@ -15,8 +15,8 @@ def create_dir():
         try:
             os.mkdir(path)
         except OSError:
-            print("Создание директории не удалось")
-            break
+            print(f"Создание директории {path} не удалось")
+            i += 1
         else:
             i += 1
 
@@ -30,13 +30,22 @@ def delete_dir():
             os.rmdir(path)
         except OSError:
             print(f"Удалить директорию {path} не удалось")
-            break
+            i += 1
         else:
             i += 1
 
 
 # Задача-2:
 # Напишите скрипт, отображающий папки текущей директории.
+
+#Решение
+
+def show_dir():
+    path = os.getcwd()
+    return [d for d in os.listdir(path) if os.path.isdir(d)]
+
+
+print(show_dir())
 
 # Задача-3:
 # Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
