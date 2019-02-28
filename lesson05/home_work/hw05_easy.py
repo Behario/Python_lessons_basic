@@ -1,11 +1,10 @@
 import os
+import shutil
+import sys
 # Задача-1:
 # Напишите скрипт, создающий директории dir_1 - dir_9 в папке,
 # из которой запущен данный скрипт.
 # И второй скрипт, удаляющий эти папки.
-
-# Определяем текущую директорию и применяем ее для создания новой папки:
-
 
 def create_dir():
     i = 1
@@ -38,14 +37,18 @@ def delete_dir():
 # Задача-2:
 # Напишите скрипт, отображающий папки текущей директории.
 
-#Решение
-
 def show_dir():
     path = os.getcwd()
     return [d for d in os.listdir(path) if os.path.isdir(d)]
 
 
-print(show_dir())
-
 # Задача-3:
 # Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
+
+def copy():
+    file_name = sys.argv[0]
+    name_destination = file_name.split("/")
+    name_destination = name_destination[-1]
+    shutil.copyfile(file_name, f"{name_destination}.copy")
+
+
