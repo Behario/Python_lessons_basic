@@ -7,27 +7,34 @@ import os
 # Определяем текущую директорию и применяем ее для создания новой папки:
 
 
-def create(answer):
-    if answer.lower() == "y":
-        i = 1
-        while i < 10:
-            path_main = os.getcwd() # Определяем текущую директорию и применяем ее для создания новой папки:
-            path = f"{path_main}/dir_{i}"
-            try:
-                os.mkdir(path)
-            except OSError:
-                print("Создание директории не удалось")
-                break
-            else:
-                i += 1
-    elif answer.lower() == "n":
-        print("Вы подтвердили отказ для создания")
-    else:
-        print("Не верный формат ввода")
+def create_dir():
+    i = 1
+    while i < 10:
+        path_main = os.getcwd() # Определяем текущую директорию и применяем ее для создания новой папки:
+        path = f"{path_main}/dir_{i}"
+        try:
+            os.mkdir(path)
+        except OSError:
+            print("Создание директории не удалось")
+            break
+        else:
+            i += 1
 
 
-question = input("Желаете создать новые директории? Y:да / N:нет ")
-create(question)
+def delete_dir():
+    i = 1
+    while i < 10:
+        path_main = os.getcwd()  # Определяем текущую директорию и применяем ее для создания новой папки:
+        path = f"{path_main}/dir_{i}"
+        try:
+            os.rmdir(path)
+        except OSError:
+            print(f"Удалить директорию {path} не удалось")
+            break
+        else:
+            i += 1
+
+
 # Задача-2:
 # Напишите скрипт, отображающий папки текущей директории.
 
