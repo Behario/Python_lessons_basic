@@ -61,18 +61,19 @@ def show_f():  # Показывает содержимое главного ка
     return [d for d in os.listdir(path) if os.path.isdir(d)]
 
 
-def show_d(req_dir):  # Показать содержимое папки, когда мы находимся в главном каталоге
-    return os.listdir(req_dir)
-
-
 def show_dc():  # Показывает содержимое из текущей папки
     path = os.getcwd()
     return os.listdir(path)
 
 
 def move(req_dir):  # Перейти в новую папку
-    os.chdir(req_dir)
-    return os.getcwd()
+    path = f"{req_dir}"
+    try:
+        os.chdir(path)
+    except NameError:
+        print("Переход невозможен")
+    else:
+        print(f"Папка {req_dir} возможна для перехода")
 
 
 def delete(req_dir):  # Удалить папку
