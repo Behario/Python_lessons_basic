@@ -31,7 +31,7 @@ def content():
           f"{hw5.show_f()}")
 
 
-question = ""
+content()
 
 while True:
 
@@ -39,34 +39,27 @@ while True:
 
     if run.lower() == "y":
         message()
-        content()
         question = input("Что желаете сделать? ")
-        origin = os.getcwd()
         if question == "1":
             name_dir = input("Введите название папки для перехода: ")
             hw5.move(name_dir)
             input(f"Сейчас вы находитесь в {os.getcwd()}")
-            ask = input("Желаете посмотреть содержимое? Y:да / N:нет ")
 
-            if ask.lower() == "y":
-                print(hw5.show_dc())
-
-            elif ask.lower() == "n":
-                print(f"Вы отказались посмотреть на содержимое папки {name_dir}")
-            # Пошел на маленькую хитрость, после окончания блока 1 мы возвращаемся в исходную директорию
-            hw5.move(origin)  # Создание и удаление файлов мы производим из главной директории
-            # Так же по желанию пользователя, он может из главной директории посмотреть содержание любой папки
         elif question == "2":
-            name_dir = input("Введите название файла, содержание которого вы желаете посмотреть: ")
-            print(hw5.show_d())
+            print(f"Вы находитесь в папке {name_dir}")
+            print(hw5.show_dc())
 
         elif question == "3":
-            name_dir = input("Введите название папки, которую желаете удалить: ")
-            hw5.delete(name_dir)
+            a = os.path.dirname(os.path.realpath(__file__))  # Нашел интересный код - возвращает всегда путь к директории, из которой запускают рабочий файл
+            os.chdir(a)
+            name_del = input("Введите название папки, которую желаете удалить: ")
+            hw5.delete(name_del)
 
         elif question == "4":
-            name_dir = input("Введите название папки, которую желаете создать: ")
-            hw5.create(name_dir)
+            a = os.path.dirname(os.path.realpath(__file__))
+            os.chdir(a)
+            name_create = input("Введите название папки, которую желаете создать: ")
+            hw5.create(name_create)
 
         else:
             print("Команда введена неверно")
