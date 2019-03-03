@@ -32,9 +32,10 @@ class Rectangle:
 
 rect1 = Rectangle([1, 3], [8, 7], [2, 9])
 
-print(f"Периметр равен: {rect1.perimeter()}")
-print(f"Высота равна: {rect1.height()}")
+print(f"Периметр треугольника равен: {rect1.perimeter()}")
+print(f"Высота треугольника равна: {rect1.height()}")
 print(f"Площадь треугольника равна: {rect1.square()}")
+print("---------------------------------")
 
 # Задача-2: Написать Класс "Равнобочная трапеция", заданной координатами 4-х точек.
 # Предусмотреть в классе методы:
@@ -57,19 +58,31 @@ class Trapezium:
         self.d2 = sqrt(  # Диагональ 2
             self.ab ** 2 + (self.bc * self.ad) - self.ad * (self.ab ** 2 - self.cd ** 2) / (self.ad - self.bc))
 
+    def sides(self):
+        print(f"Верхнее основание трапеции: {round(self.bc, 2)} \n"
+              f"Нижнее основание трапеции: {round(self.ad, 2)} \n"
+              f"Левая сторона трапеции: {round(self.ab, 2)} \n"
+              f"Правая сторона трапеции: {round(self.cd, 2)} \n"
+              f"Диагональ d1 трапеции: {round(self.d1, 2)} \n"
+              f"Диагональ d2 трапеции: {round(self.d2, 2)} \n")
+
     def check_trapezium(self):  # Признак диагоналей
         if round(self.d1 ** 2 + self.d2 ** 2) \
-                == round(2 * self.ad * self.bc + self.ab ** 2 + self.cd ** 2):  # Доп проверка, а вдруг это вообще не трапеция!
+                == round(2 * self.ad * self.bc + self.ab ** 2 + self.cd ** 2):  # Доп проверка
             if self.d1 == self.d2:
-                print(f"Это равнобедренная трапеция."
-                         f" Диагонали равны: диагональ 1 = {round(self.d1, 2)}"
-                         f" и диагональ 2 = {round(self.d2, 2)}")
+                print(f"Это равнобедренная трапеция. \n"
+                         f"Диагонали равны: диагональ 1 = {round(self.d1, 2)} \n"
+                         f"и диагональ 2 = {round(self.d2, 2)}")
             else:
-                print(f"Это неравнобедренная трапеция."
-                         f" Диагонали не равны: диагональ 1 = {round(self.d1, 2)}"
-                         f" и диагональ 2 = {round(self.d2, 2)}")
+                print(f"Это неравнобедренная трапеция. \n"
+                         f"Диагонали не равны: диагональ 1 = {round(self.d1, 2)} \n"
+                         f"и диагональ 2 = {round(self.d2, 2)}")
         else:
             print("Это не трапеция")
+
+    def perimeter(self):
+        p = (self.ab + self.bc + self.cd + self.ad)
+        return round(p, 2)
 
     def sq(self):
         try:
@@ -85,6 +98,10 @@ class Trapezium:
 
 
 trapezium1 = Trapezium([1, 0], [2, 3], [4, 3], [5, 0])
-
+trapezium1.sides()
+print("---------------------------------")
 trapezium1.check_trapezium()
+print("---------------------------------")
+print(f"Периметр трапеции равен: {trapezium1.perimeter()}")
+print("---------------------------------")
 trapezium1.sq()
