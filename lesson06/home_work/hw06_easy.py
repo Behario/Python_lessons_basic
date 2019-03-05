@@ -85,16 +85,11 @@ class Trapezium:
         return round(p, 2)
 
     def sq(self):
-        try:
-            p = (self.ab + self.bc + self.cd + self.ad)/2
-            s = (self.ad + self.bc)/abs(self.ad - self.bc)*sqrt(  # Формула Герона
-                (p - self.ad) * (p - self.bc) * (p - self.ad - self.ab) *
-                (p - self.ad - self.cd)
-            )
-        except ValueError:
-            print("Похоже что - то пошло не так, но мы скоро выясним!")
-        else:
-            print(f"Плащадь трапеции равна: {round(s, 2)}")
+        p = (self.ab + self.bc + self.cd + self.ad)/2
+        s = (self.ad + self.bc)/abs(self.ad - self.bc)*sqrt(  # Формула Герона
+            (p - self.ad) * (p - self.bc) * (p - self.ad - self.ab) *
+            (p - self.ad - self.cd))
+        print(f"Плащадь трапеции равна: {round(s, 2)}")
 
 
 trapezium1 = Trapezium([1, 0], [2, 3], [4, 3], [5, 0])
