@@ -57,3 +57,119 @@
 модуль random: http://docs.python.org/3/library/random.html
 
 """
+import random
+
+
+class Card:
+    def __init__(self, name):
+        self.card_values = random.sample(range(1, 91), 15)  # Формируем случайную последовательность чисел,
+        # которая заносится в карточку (данный параметр является списком случайных значений от 1 до 90 длиной в 15 цифр)
+        self.card_name = name  # Присваиваем имя карточки (Компьютер / игрок)
+        self.list1 = self.card_values[:5]
+        self.list2 = self.card_values[5:10]
+        self.list3 = self.card_values[10:]   # Разбиваем параметр card_values
+        # на три списка одинаковой длины по 5 элементов
+
+        # Функция будет вносить пустые значения на случайный номер элемента листа
+        def void_spaces_in_list(lst):
+            list_return = sorted(lst)
+            for i in range(5):  # Должно быть четыре пустых значения
+                # в каждой строке карточки
+                list_return.insert(random.randint(0, 9), " ")  # Randint возвращает случайное число
+                # от 0 до 9 включительно, insert ставит на место под номером возвращаемым номером пустую строку
+            return list_return
+
+        self.line1 = void_spaces_in_list(self.list1)
+        self.line2 = void_spaces_in_list(self.list2)
+        self.line3 = void_spaces_in_list(self.list3)  # Преобразовываем списки, чтобы в них были значения с пробелами
+        self.lines = (self.line1, self.line2, self.line3)  # Делаем list, элементы которого наши преобразованные списки
+        self.create_card(self.lines)
+
+    def create_card(self, lines):  # Данный метод "рисует карточки" преобразовывая элементы self.lines
+        # к строковому формату и последовательному их выводу методом print
+        print(f"--- Карточка {self.card_name}а ---")  # Буква {a} в строке, чтобы было склонение названия
+        for line in lines:
+            line_return = ''
+            for i in line:
+                line_return += str(i) + ' '  # Добавляем пробел, чтобы элементы стояли не в самый притык
+            print(line_return)
+        print("--------------------------")
+
+    @staticmethod
+    def get_barrel(l):  # Делаю метод статическим
+        random.shuffle(l)
+        for i in l[:]:
+            yield l.pop(l.index(i))
+
+    def check_turn(self, barrel):  # Метод проверяет совпадения значений бочонка и карточки,
+        # и если находит, то делает подстановку "-" на соответсвующее значение
+        for line in self.lines:
+            if barrel in line:  # Если нашел
+                place = line.index(barrel)  # Метод .index, так как работаем с типом list
+                line[place] = '-'  # Присваиваем новое значение на место вхождения
+        return self.create_card(self.lines)
+
+    def check_winner(self):  # Данный метод смотрит количество прочерков в карточках,
+        # тот у кого их больше - победил
+        count_void = 0  # Имя переменной, которая выступает в качестве счетчика прочерков
+        for line in self.lines:  # Пробегаемся по нашему параметру self.lines
+            if "-" in line:  # Смотрим, есть ли прочерки в каждом элементе self.lines
+                count_void += 1
+        return count_void  # Возвращаем значение счетчика
+
+
+print("Лень описывать правила игры, поэтому: вам дается число, если хотите играть, жмякайте Y. \n"
+      "Если вам надоело, жмякате Q. \n"
+      "У вас 5 раундов с Компухтером, кто победит, а кто проиграет? Да кто его знает! \n"
+      "Начинаем!")
+print("------------------------------------------------------------------")
+player_card = Card("Игрок")
+computer_card = Card("Компьютер")
+lst = list(range(1, 91))
+
+barrels_values = Card.get_barrel(lst)  # Создаем генератор, основанный на статическом методе класса Card
+
+answer = ""  # Переменная, чтобы ввойти в цикл
+self_counter = 0  # Cчетчик моих страданий
+while answer.lower() != "q":  # Пока пользователь вводит q играем
+    barrel_value = next(barrels_values)  # Достаем из генератора некое значение
+    print(f"Наш ведущий достал бочонок под номером: {barrel_value}\n"
+          f"Осталось {len(lst)} бочонков")  # Показываем его игроку
+    answer = input("Введите ваше пожелание: Y - играем, Q - выходим ")  # Даем игроку иллюзию выбора,
+    # как будто от его решения что-то зависит
+    if answer.lower() == "y":
+        player_card.check_turn(barrel_value)
+        computer_card.check_turn(barrel_value)  # Вызов соответствующих методов
+        self_counter += 1  # Заполняем счетчик на единичку
+        if self_counter == 5:  # Вызов этой конструкции происходит, когда счетчик становится равным 10
+            if player_card.check_winner() > computer_card.check_winner():
+                print("Победил Игрок, поздравляем!")
+            elif player_card.check_winner() < computer_card.check_winner():
+                print("Победил Компьютер, удачи в следующий раз!")
+            elif player_card.check_winner() == computer_card.check_winner():
+                print("Ничья!")
+            break
+    elif answer.lower() == "q":
+        print("Выходим из игры")
+        break
+    else:
+        print("Мы такого не знаем, извините, давайте по новой")
+        continue
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
